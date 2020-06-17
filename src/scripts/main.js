@@ -2,21 +2,23 @@
 
 const carousel = document.querySelector('.carousel');
 const slides = [ ...carousel.children ];
+const slideWidth = slides[0].getBoundingClientRect().width;
 
 const prevButton = document.querySelector('.carousel__btn_prev');
 const lastButton = document.querySelector('.carousel__btn_next');
-// const dots = document.querySelector('.carousel__dots-wrap');
-const slideWidth = slides[0].getBoundingClientRect().width;
 
-const setSLidePosition = (slide, index) => {
-  slide.dataset.shift = slideWidth * index + 'px';
-};
+const dotsCollection = document.querySelector('.carousel__dots-wrap');
+const dots = [ ...dotsCollection.children ];
 
-slides.forEach(setSLidePosition);
+slides.forEach(setSlidePosition);
 
 lastButton.addEventListener('click', rightShiftHandler);
 prevButton.addEventListener('click', leftShiftHandler);
-// dots.addEventListener('click', dotsClickHandler);
+dotsCollection.addEventListener('click', dotsClickHandler);
+
+function setSlidePosition(slide, index) {
+  slide.dataset.shift = slideWidth * index + 'px';
+};
 
 function rightShiftHandler() {
   const currentSlide = carousel.querySelector('.current_slide');
@@ -42,4 +44,18 @@ function leftShiftHandler() {
   carousel.style.transform = `translateX(-${amountToMove})`;
   currentSlide.classList.remove('current_slide');
   previousSlide.classList.add('current_slide');
+}
+
+function dotsClickHandler(e) {
+  const currentDot = e.target.closest('.carousel__dot');
+
+  if (currentDot) {
+    const activeDot = dotsCollection.querySelector('.carousel__dot_active');
+    const index = dots.findIndex(dot => dot === currentDot);
+    const amountToMove = slides[index].dataset.shift;
+
+    carousel.style.transform = `translateX(-${amountToMove})`;
+    activeDot.classList.remove('carousel__dot_active');
+    dots[index].classList.add('carousel__dot_active');
+  }
 }
