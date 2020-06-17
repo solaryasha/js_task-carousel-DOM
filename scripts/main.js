@@ -20,6 +20,12 @@ function setSlidePosition(slide, index) {
   slide.dataset.shift = slideWidth * index + 'px';
 };
 
+function shiftAndRemove(previous, next, howMuch) {
+  carousel.style.transform = `translateX(-${howMuch})`;
+  previous.classList.remove('current_slide');
+  next.classList.add('current_slide');
+}
+
 function rightShiftHandler() {
   const currentSlide = carousel.querySelector('.current_slide');
   const nextSlide = (currentSlide.nextElementSibling)
@@ -28,9 +34,7 @@ function rightShiftHandler() {
 
   const amountToMove = nextSlide.dataset.shift;
 
-  carousel.style.transform = `translateX(-${amountToMove})`;
-  currentSlide.classList.remove('current_slide');
-  nextSlide.classList.add('current_slide');
+  shiftAndRemove(currentSlide, nextSlide, amountToMove);
 }
 
 function leftShiftHandler() {
@@ -41,9 +45,7 @@ function leftShiftHandler() {
 
   const amountToMove = previousSlide.dataset.shift;
 
-  carousel.style.transform = `translateX(-${amountToMove})`;
-  currentSlide.classList.remove('current_slide');
-  previousSlide.classList.add('current_slide');
+  shiftAndRemove(currentSlide, previousSlide, amountToMove);
 }
 
 function dotsClickHandler(e) {

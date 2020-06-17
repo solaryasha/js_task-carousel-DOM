@@ -100,7 +100,8 @@ ul {
     width: 10px;
     height: 10px;
     background-color: #a4a2a4;
-    border-radius: 50%; }
+    border-radius: 50%;
+    cursor: pointer; }
     .carousel__dot:not(:last-child) {
       margin-right: 1rem; }
     .carousel__dot_active {
