@@ -53,6 +53,8 @@ ul {
     background-color: #a4a2a4;
     border-radius: 50%;
 
+    cursor: pointer;
+
     &:not(:last-child) {
       margin-right: 1rem;
     }
