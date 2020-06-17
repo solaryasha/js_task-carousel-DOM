@@ -4,6 +4,59 @@
 @import "twitter-card";
 @import "carousel-button";
 
+* {
+  box-sizing: border-box;
+}
+
 body {
+
   font-family: Lato, sans-serif;
+  display: flex;
+  flex-direction: column;
+
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+.slider {
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+}
+
+.carousel {
+  display: flex;
+
+  &__track {
+    width: 310px;
+    margin: 0 20px;
+
+    overflow: hidden;
+  }
+
+  &__dots-wrap {
+    margin: 2rem auto;
+    display: flex;
+
+  }
+
+  &__dot {
+    width: 10px;
+    height: 10px;
+
+    background-color: #a4a2a4;
+    border-radius: 50%;
+
+    &:not(:last-child) {
+      margin-right: 1rem;
+    }
+
+    &_active {
+      background-color: #767476;
+    }
+  }
 }
