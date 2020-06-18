@@ -21,9 +21,14 @@ function setSlidePosition(slide, index) {
 };
 
 function shiftAndRemove(previous, next, howMuch) {
+  const prevIndex = slides.findIndex(slide => slide === previous);
+  const nextIndex = slides.findIndex(slide => slide === next);
+
   carousel.style.transform = `translateX(-${howMuch})`;
   previous.classList.remove('current_slide');
   next.classList.add('current_slide');
+  dots[prevIndex].classList.remove('carousel__dot_active');
+  dots[nextIndex].classList.add('carousel__dot_active');
 }
 
 function rightShiftHandler() {
